@@ -118,7 +118,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<div class="col-sm-7 offset-lg-1">
 					   <!--	<h4>Personal Info</h4>
-							<p>Hello, My name is <strong>Rubin Sabu</strong>. I am 6 years experienced <strong>web designer</strong></p> -->
+							 -->
 							<h4 class="mt-4">Skills & Abilities</h4>
 							<div class="progress-one mt-3">
 								<h4 class="progress-tittle">Web Designing</h4>
@@ -316,23 +316,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="row">
 							<div class="form-group col-md-6 ">
 							  <label>Name</label>
-							  <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+							  <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
 							</div>
 							<div class="form-group col-md-6">
 							  <label>Email</label>
-							  <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email">
+							  <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
 							</div>
 							<div class="form-group col-md-6">
 							  <label>Phone No.</label>
-							  <input type="text" class="form-control" id="phone" placeholder="Enter Phone no." name="phone">
+							  <input type="text" class="form-control" id="phone" placeholder="Enter Phone no." name="phone" required>
 							</div>
 							<div class="form-group col-md-6">
 							  <label>Subject</label>
-							  <input type="text" class="form-control" id="subject" placeholder="Enter Subject" name="subject">
+							  <input type="text" class="form-control" id="subject" placeholder="Enter Subject" name="subject" required>
 							</div>
 							<div class="form-group col-12">
 							  <label>Message</label>
-							  <textarea name="body" class="form-control" id="iq" placeholder="Enter Your Message Here"></textarea>
+							  <textarea name="body" class="form-control" id="iq" placeholder="Enter Your Message Here" required></textarea>
 							</div>				
 							<button type="submit" class="btn btn-default">Submit </button>
 						</div>
@@ -342,8 +342,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<script>
+
+        $(document).ready(function() {
+        $("#submit-form").on("keydown", function(e) {
+            if (e.key === "Enter") {
+                e.preventDefault(); // Prevent the default form submission
+            }
+        });
+
         $("#submit-form").submit((e)=>{
-            e.preventDefault()
+            e.preventDefault();
+
+		if (validateForm()) {
             $.ajax({
                 url:"https://script.google.com/macros/s/AKfycbz6fAxe1P-17IxW79AZujqBDbhv4EqGIrArTCTJ3rUXKSj5nrUrAO1K8hCl0Elz1HPg/exec",
                 data:$("#submit-form").serialize(),
@@ -357,9 +367,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     alert("Something Error")
     
                 }
-            })
+            });
+		}else{
+			alert("Please fill out all required fields.");
+		}
         })
+
+		function validateForm() {
+            // Check if all required fields are filled
+            var isValid = true;
+            $("#submit-form input, #submit-form textarea").each(function() {
+                if ($(this).val().trim() === "") {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+	});
     </script>
+	
 </section>
 <!-- //Contact -->		
 		
@@ -394,7 +420,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- copyright -->
 <div class="copyright py-3 text-center">
 	<div class="container">
-		<p class="my-2">© 2022 All rights reserved | Design by
+		<p class="my-2">© 2024 All rights reserved | Design by
 			<a href="http://w3layouts.com"> Rubin Sabu</a>
 		</p>
 	</div>
